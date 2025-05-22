@@ -1,2 +1,2 @@
 # QUIZZLY
-## Add description
+Quizzly is an exam application built entirely on core java
