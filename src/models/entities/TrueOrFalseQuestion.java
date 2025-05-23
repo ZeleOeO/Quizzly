@@ -1,6 +1,5 @@
 package models.entities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +7,8 @@ public class TrueOrFalseQuestion implements Question {
 
     private String questionText;
     private List<Option> options;
+    private Option correctOption;
+    private Option userSelectedOption;
 
     public TrueOrFalseQuestion() {
         this.options = Arrays.asList(new Option[2]);
@@ -31,5 +32,25 @@ public class TrueOrFalseQuestion implements Question {
     @Override
     public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    @Override
+    public Option getCorrectOption() {
+        return this.correctOption;
+    }
+
+    @Override
+    public void setCorrectOption(Option correctOption) {
+        this.correctOption = correctOption;
+    }
+
+    @Override
+    public Option getUserSelectedOption() {
+        return this.userSelectedOption;
+    }
+
+    @Override
+    public void setUserSelectedOption(Option userSelectedOption) {
+        this.userSelectedOption = userSelectedOption;
     }
 }

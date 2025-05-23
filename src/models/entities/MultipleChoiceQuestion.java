@@ -1,11 +1,19 @@
 package models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MultipleChoiceQuestion implements Question {
     private String questionText;
     private List<Option> options;
+    private Option correctOption;
+    private Option selectedUserOption;
+
+    public MultipleChoiceQuestion() {
+       this.options = Arrays.asList(new Option[4]);
+    }
 
     @Override
     public void setQuestionText(String questionText) {
@@ -25,5 +33,25 @@ public class MultipleChoiceQuestion implements Question {
     @Override
     public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    @Override
+    public Option getCorrectOption() {
+        return this.correctOption;
+    }
+
+    @Override
+    public void setCorrectOption(Option correctOption) {
+        this.correctOption = correctOption;
+    }
+
+    @Override
+    public Option getUserSelectedOption() {
+        return this.selectedUserOption;
+    }
+
+    @Override
+    public void setUserSelectedOption(Option userSelectedOption) {
+        this.selectedUserOption = userSelectedOption;
     }
 }
