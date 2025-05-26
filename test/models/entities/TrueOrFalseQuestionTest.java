@@ -3,55 +3,67 @@ package models.entities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TrueOrFalseQuestionTest {
+public class TrueOrFalseQuestionTest {
 
     private TrueOrFalseQuestion question;
     private Option trueOption;
     private Option falseOption;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         question = new TrueOrFalseQuestion();
         trueOption = new Option("True");
         falseOption = new Option("False");
-
-        List<Option> options = Arrays.asList(trueOption, falseOption);
-        question.setOptions(options);
     }
 
     @Test
-    void testSetAndGetQuestionText() {
-        question.setQuestionText("Is the sky blue?");
-        assertEquals("Is the sky blue?", question.getQuestionText());
+    public void testSetAndGetQuestionText() {
+        question.setQuestionText("The earth is flat.");
+        assertEquals("The earth is flat.", question.getQuestionText());
     }
 
     @Test
-    void testSetAndGetOptions() {
+    public void testSafeAddOption() {
+        question.safeAddOption(trueOption);
+        question.safeAddOption(falseOption);
         List<Option> options = question.getOptions();
-        assertEquals(2, options.size());
-        assertEquals("True", options.get(0).getOptionText());
-        assertEquals("False", options.get(1).getOptionText());
+        assertTrue(options.contains(trueOption));
+        assertTrue(options.contains(falseOption));
     }
 
     @Test
-    void testSetAndGetCorrectOption() {
+    public void testSetAndGetCorrectOption() {
         question.setCorrectOption(trueOption);
         assertEquals(trueOption, question.getCorrectOption());
     }
 
     @Test
-    void testSetAndGetUserSelectedOption() {
+    public void testSetAndGetUserSelectedOption() {
         question.setUserSelectedOption(falseOption);
         assertEquals(falseOption, question.getUserSelectedOption());
     }
 
     @Test
-    void testOptionArrayLimit() {
-        question.getOptions().add(new Option("True"));
+    public void testInitialOptionsSize() {
+        // Should be initialized with 2 nulls due to Arrays.asList(new Option[2])
+        List<Option> options = question.getOptions();
+        assertEquals(2, options.size());
+        assertNull(options.get(0));
+        assertNull(options.get(1));
+    }
+
+    @Test
+    public void testSafeAddOptionExceedsLimit() {
+        question.safeAddOption(trueOption);
+        question.safeAddOption(falseOption);
+        question.safeAddOption(new Option("Stuff"));
+        List<Option> options = question.getOptions();
+        assertEquals(2, options.size());
+        assertTrue(options.contains(trueOption));
+        assertTrue(options.contains(falseOption));
     }
 }
