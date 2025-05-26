@@ -30,11 +30,6 @@ public class TrueOrFalseQuestion implements Question {
     }
 
     @Override
-    public void setOptions(List<Option> options) {
-        this.options = options;
-    }
-
-    @Override
     public Option getCorrectOption() {
         return this.correctOption;
     }
@@ -52,5 +47,15 @@ public class TrueOrFalseQuestion implements Question {
     @Override
     public void setUserSelectedOption(Option userSelectedOption) {
         this.userSelectedOption = userSelectedOption;
+    }
+
+    @Override
+    public void safeAddOption(Option option) {
+        for (int i = 0; i < this.options.size(); i++) {
+            if (this.options.get(i) == null) {
+                options.set(i, option);
+                return;
+            }
+        }
     }
 }

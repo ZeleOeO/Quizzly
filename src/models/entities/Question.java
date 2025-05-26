@@ -6,9 +6,9 @@ public interface Question {
     void setQuestionText(String questionText);
     String getQuestionText();
     List<Option> getOptions();
-    void setOptions(List<Option> options);
     Option getCorrectOption();
     void setCorrectOption(Option correctOption);
     Option getUserSelectedOption();
     void setUserSelectedOption(Option userSelectedOption);
+    void safeAddOption(Option option);
 }

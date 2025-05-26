@@ -31,11 +31,6 @@ public class MultipleChoiceQuestion implements Question {
     }
 
     @Override
-    public void setOptions(List<Option> options) {
-        this.options = options;
-    }
-
-    @Override
     public Option getCorrectOption() {
         return this.correctOption;
     }
@@ -53,5 +48,10 @@ public class MultipleChoiceQuestion implements Question {
     @Override
     public void setUserSelectedOption(Option userSelectedOption) {
         this.selectedUserOption = userSelectedOption;
+    }
+
+    @Override
+    public void safeAddOption(Option option) {
+        this.options.add(option);
     }
 }
